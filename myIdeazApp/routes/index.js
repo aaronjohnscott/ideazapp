@@ -1,10 +1,15 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/User");
-var adjectiveList = require('../public/javascripts/adjectives')
-var nounList = require('../public/javascripts/nouns')
-var verbList = require('../public/javascripts/verbs')
+var adjectives = require('../public/javascripts/adjectives')
+var nouns = require('../public/javascripts/nouns')
+var verbs = require('../public/javascripts/verbs')
 var top100 = require('../public/javascripts/top100movies')
+
+randomWord = (words) => {
+  let randomNumber = Math.floor(Math.random() * words.length)
+  return words[randomNumber]
+}
 
 /* GET signup page. */
 router.get("/", function (req, res, next) {
@@ -13,14 +18,7 @@ router.get("/", function (req, res, next) {
 
 
 router.get("/keyword-connection", (req, res, next) => {
-  let ranNumAdj = Math.floor(Math.random() * adjectiveList.length)
-  const adj = (adjectiveList[ranNumAdj])
-  let ranNumNoun = Math.floor(Math.random() * nounList.length)
-  const noun = (nounList[ranNumNoun])
-  let ranNumVerb = Math.floor(Math.random() * verbList.length)
-  const verb = (verbList[ranNumVerb])
-  console.log(top100[5].title)
-  res.render("keywordConnection", { adj, noun, verb })
+  res.render("keywordConnection", { adj: randomWord(adjectives), noun: randomWord(nouns), verb: randomWord(verbs) })
 })
 
 router.get("/home/:username", function (req, res, next) {
