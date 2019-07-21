@@ -4,13 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
 var logger = require('morgan');
-const db = require("./config/database");
+var expressValidator = require('express-validator')
+var expressSession = require('express-session')
+
 var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
+
+const db = require("./config/database");
 db.authenticate()
   .then(() => console.log("Database Connected"))
   .catch(e => console.log(e));
-
 
 var app = express();
 
@@ -20,13 +23,19 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // parse application/x-www-form-urlencoded
-
+app.use(expressSession({
+  secret: "aaron",
+  saveUninitialized: false,
+  resave: false
+}))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

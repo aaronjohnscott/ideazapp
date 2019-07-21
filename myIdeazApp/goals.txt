@@ -1,0 +1,5 @@
+Register - Create New User (check for multiple) - Reroute to Login
+Login - Validate (save userid in sessions / reroute to home)
+SessionSecurity - Add UserId Auth to Multiple pages... (!req.session.userid)
+Home Page - Email Address (pull data from db using req.session.userId)
+

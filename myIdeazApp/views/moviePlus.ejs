@@ -1,9 +1,7 @@
 <% include ./partials/header %>
-<h1>
-  <%= movie %></h1>
-but as a 
-<h1><%= genre %>
-</h1>
+    <h1><%= movie1 %> </h1>
+     meets
+     <h1> <%= movie2 %></h1>
 
 <%# Buttons  %>
 <div>
@@ -21,7 +19,7 @@ but as a
     <div class="modal-content">
 
         <div class="modal-header center">
-            <p class="modal-title"><%= movie %> | | <%= genre %></p>
+            <p class="modal-title"><%= movie1 %> | | <%= movie2 %></p>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -44,8 +42,8 @@ but as a
         </div>
         <div class="modal-footer">    
             <form id="usrform" action="/submitidea" method="POST" >
-                <input type='hidden' value="<%= movie %>" name="keyword1">
-                <input type='hidden' value="<%= genre %>" name="keyword2">
+                <input type='hidden' value="<%= movie1 %>" name="keyword1">
+                <input type='hidden' value="<%= movie2 %>" name="keyword2">
                 <button type="submit" class="btn btn-primary">Save changes</button>
             </form>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

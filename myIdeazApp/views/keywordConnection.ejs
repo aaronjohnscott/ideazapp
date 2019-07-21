@@ -1,13 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1><%= topWord %></h1>
-    <h1><%= topic %></h1>
-  </body>
-</html>
+<% include ./partials/header %>
+    <h1><%= topWord1 %></h1>
+    -----------
+<h1><%= topWord2 %></h1>
+
+<%# Buttons  %>
+<div>
+    <button type="button" onclick="location.reload()" class="btn btn-success">
+        NEW IDEA
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        SAVE IDEA 
+    </button>
+</div>
+
+<%# Modal %>
+<div class="modal" id="exampleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+        <div class="modal-header center">
+            <p class="modal-title"><%= topWord1 %> | | <%= topWord2 %></p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-b1">
+            <textarea name="idea" form="usrform" class="form-control" style="min-width: 80%"></textarea>
+        </div>
+            <div class="col-auto my-1">
+        <label class="mr-sm-2 sr-only" for="genre">Genre</label>
+        <select form="usrform" name="genre" id="genre" class="custom-select mr-sm-2">
+            <option selected>Genre</option>
+            <option value="horror">Horror</option>
+            <option value="comedy">Comedy</option>
+            <option value="action">Action</option>
+            <option value="drama">Drama</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="romance">Romance</option>
+            <option value="scifi">Sci-Fi</option>
+        </select>
+        </div>
+        <div class="modal-footer">    
+            <form id="usrform" action="/submitidea" method="POST" >
+                <input type='hidden' value="<%= topWord1 %>" name="keyword1">
+                <input type='hidden' value="<%= topWord2 %>" name="keyword2">
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+
+    </div>
+  </div>
+</div>
+<% include ./partials/footer %>
