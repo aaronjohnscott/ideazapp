@@ -1,40 +1,60 @@
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser')
-var logger = require('morgan');
-var expressValidator = require('express-validator')
-var expressSession = require('express-session')
+const flash = require('connect-flash');
+const passport = require('passport');
+const session = require('express-session');
+const app = express();
+const path = require('path')
 
-var indexRouter = require('./routes');
-var usersRouter = require('./routes/users');
+// Passport Config
+require('./config/passport')(passport);
 
-const db = require("./config/database");
+// DB Config
+const db = require('./config/database');
+
+// Connect to Postgres
 db.authenticate()
   .then(() => console.log("Database Connected"))
   .catch(e => console.log(e));
 
-var app = express();
-
-// view engine setup
+// EJS
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(expressValidator());
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// parse application/x-www-form-urlencoded
-app.use(expressSession({
-  secret: "aaron",
-  saveUninitialized: false,
-  resave: false
-}))
+// Express body parser
+app.use(express.urlencoded({ extended: false }));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// Express session
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
+app.use(flash());
+
+// Global variables
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
+
+// Routes
+app.use('/', require('./routes/index.js'));
+app.use('/users', require('./routes/users.js'));
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
 
 // catch 404 and forward to error handler
@@ -47,12 +67,9 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 module.exports = app;

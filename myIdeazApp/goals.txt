@@ -3,3 +3,19 @@ Login - Validate (save userid in sessions / reroute to home)
 SessionSecurity - Add UserId Auth to Multiple pages... (!req.session.userid)
 Home Page - Email Address (pull data from db using req.session.userId)
 
+xxxxxxxxxxxxxxxxxx
+LogOut Button - End Session - User Passport to End Session and Logout - DONE
+Passport Local-Strategy - DONE
+Bcrypt - no plain text passwords - DONE
+xxxxxxxxxxxxxxxxxxxx
+1. Style
+2. User Info Displayed on Home Screen
+3. Clean Up Code
+4. Deploy on AWS
+
+Eventually - React
+
+
+Notes - Review!!!   
+.env -  process.evn.NODE_ENV ??
+ASYNC / AWAIT
