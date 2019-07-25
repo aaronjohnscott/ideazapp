@@ -1,6 +1,5 @@
 .loader {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,25 +12,23 @@
   margin: 8px;
   filter: invert(1);
 }
-.center {
-  display: flex;
-  justify-content: center;
-}
-
-input {
-  line-height: 3em;
-}
 
 #title {
-  font-family: "Fascinate", cursive;
+  font-family: "Permanent Marker", cursive;
   font-size: 2.5rem;
 }
 
-.the-body {
+.list {
+  margin-top: -15vh;
+}
+.outline {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+.body {
   display: flex;
   flex-direction: column;
-  font-family: "Raleway", sans-serif;
-  height: 80vh;
+  margin-top: 20vh;
   justify-content: center;
   align-items: center;
   text-align: center;

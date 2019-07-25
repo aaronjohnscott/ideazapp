@@ -23,7 +23,7 @@ router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 
-// Register
+// Register POST
 router.post('/register', (req, res) => {
   const { email, password, password2 } = req.body;
   let errors = [];
@@ -75,34 +75,6 @@ router.post('/register', (req, res) => {
   }
 });
 
-// router.post('/register', (req, res, next) => {
-//   //FIND ALL USERS AND SEARCH FOR EMAIL...
-//   let { email, password, password2 } = req.body;
-//   if (password !== password2) {
-//     res.render("register", {
-//       alert: "password does not match"
-//     })
-//     return
-//   }
-//   User.findOne({ where: { email: email } })
-//     .then((user) => {
-//       if (user) {
-//         res.render("register",
-//           { alert: "email already exists" })
-//         return
-//       }
-//       User.create({
-//         password,
-//         email
-//       })
-//         .then(() => {
-//           res.redirect(`login`)
-//         })
-//         .catch(e => console.log(e));
-//     }
-//     )
-// })
-
 router.get('/', (req, res, next) => {
   res.redirect('/login')
 })
@@ -110,35 +82,8 @@ router.get('/', (req, res, next) => {
 router.post('/login',
   passport.authenticate('local'),
   function (req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
     res.redirect('/dashboard');
   });
-
-// router.post('/login', (req, res, next) => {
-//   // get req.body info
-//   let { password, email } = req.body;
-//   User.findOne({ where: { email: email } })
-//     .then((user) => {
-//       if (!user) {
-//         res.render("login",
-//           { alert: "email not found" })
-//         return
-//       }
-//       if (user.password !== password) {
-//         res.render("login",
-//           { alert: "password doesn't match" })
-//         return
-//       }
-//       req.session.userId = user.id
-//       req.session.email = user.email
-//       res.redirect("/dashboard")
-//     })
-//     .catch(err => console.log(err))
-//   // search db for email
-//   // if you find it, compare passwords
-//   // then start session 
-// })
 
 router.post('/submitidea', (req, res) => {
   let userId = req.user.id;
@@ -188,8 +133,10 @@ router.get("/movie-meets", ensureAuthenticated, (req, res, next) => {
 })
 
 router.get("/dashboard", ensureAuthenticated, function (req, res, next) {
-  console.log(req.user)
-  res.render("dashboard", { user: req.user });
+  Idea.findAll({ where: { userId: req.user.id } })
+    .then(ideas => {
+      res.render("dashboard", { user: req.user, ideas });
+    })
 });
 
 router.get('/logout', function (req, res) {

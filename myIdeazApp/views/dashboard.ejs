@@ -1,5 +1,12 @@
 <% include ./partials/header %>
-
-    <H1>Hello, <%= user.email %> and welcome to Ideaz</H1>
+    <div class="list container">
+    <h1>Your Ideas</h1>
+    <hr>
+        <% ideas.forEach(function(ideas){ %>
+            <p class="px-5"><%- ideas.idea %> <span class="text-uppercase"> - <%- ideas.genre %></span></p>
+            <h6 class="text-uppercase"><%- ideas.keyword1 %> - <%- ideas.keyword2 %> </h6>
+            <hr>
+        <% }); %>
+    </div>
 
 <% include ./partials/footer %>

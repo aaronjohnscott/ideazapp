@@ -1,12 +1,12 @@
 <% include ./partials/header %>
-<h1>
-  <%= movie %></h1>
-but as a 
-<h1><%= genre %>
-</h1>
+<div class="mb-2">
+    <h1><%= movie %></h1>
+        but as a 
+    <h1><%= genre %></h1>
+</div>
 
 <%# Buttons  %>
-<div>
+<div >
     <button type="button" onclick="location.reload()" class="btn btn-success">
         NEW IDEA
     </button>
@@ -21,13 +21,13 @@ but as a
     <div class="modal-content">
 
         <div class="modal-header center">
-            <p class="modal-title"><%= movie %> | | <%= genre %></p>
+            <p class="modal-title text-uppercase"><%= movie %> but as a <%= genre %></p>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-b1">
-            <textarea name="idea" form="usrform" class="form-control" style="min-width: 80%"></textarea>
+            <textarea name="idea" form="usrform" class="form-control" style="min-width: 80%" placeholder="Idea goes here..."></textarea>
         </div>
             <div class="col-auto my-1">
         <label class="mr-sm-2 sr-only" for="genre">Genre</label>

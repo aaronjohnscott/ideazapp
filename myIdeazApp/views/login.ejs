@@ -1,15 +1,15 @@
 <% include ./partials/header %>
+
+<h1>LOGIN</h1>
 <form action="/login" method="POST">
-    
-    <div class="input">
-        <label for="email">Email</label>
-        <input type='text' id="email" name='email'>
-    </div>
-    
-    <div class="input">
-        <label for="password">Password</label>
-        <input type='password' id="password" name='password'>
-    </div>
-    <button type='submit'>Login</button>
+  <div class="form-group">
+    <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" id="password" name='password' placeholder="Password">
+  </div>
+  <button type="submit" class="mb-2 btn btn-primary">LOGIN</button><br>
+
+  <a href="/register" class="btn btn-warning">Register Here</a>
 </form>
 <% include ./partials/footer %>

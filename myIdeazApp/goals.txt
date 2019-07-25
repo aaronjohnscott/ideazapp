@@ -9,6 +9,7 @@ Passport Local-Strategy - DONE
 Bcrypt - no plain text passwords - DONE
 xxxxxxxxxxxxxxxxxxxx
 1. Style
+1.1 - Register auto logins, maybe into a welcome screen you only see once?
 2. User Info Displayed on Home Screen
 3. Clean Up Code
 4. Deploy on AWS
