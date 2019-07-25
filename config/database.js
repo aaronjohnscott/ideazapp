@@ -3,5 +3,5 @@ ENV.config()
 
 const Sequelize = require("sequelize");
 module.exports = new Sequelize(
-    POSTGRES_INSTANCE
+    process.env.POSTGRES_INSTANCE
 );
